@@ -1,4 +1,4 @@
-import { GuestBookModel } from './GuestBookModel';
+import GuestBookModel from './GuestBookModel';
 
 export default interface GuestBookStore {
   guestbook: GuestBookModel;

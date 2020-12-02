@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from './styles';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import Home from '../Home';
+import About from '../About';
 
 export default function ButtonAppBar() {
   const classes = useStyles();
@@ -21,22 +23,19 @@ export default function ButtonAppBar() {
           <Typography variant='h6' className={classes.title}>
             News
           </Typography>
-          <Button color='inherit'>Login</Button>
+          <Button component={Link} to='/' color='inherit'>
+            Home
+          </Button>
+          <Button component={Link} to='/about' color='inherit'>
+            About
+          </Button>
         </Toolbar>
       </AppBar>
 
       <div className='App'>
-        <div>
-          <Link to='/'>Homepage</Link>
-          <Link to='/about'>About</Link>
-        </div>
         <Switch>
-          <Route exact path='/'>
-            <h1>Home</h1>
-          </Route>
-          <Route exact path='/about'>
-            <h1>About</h1>
-          </Route>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/about' component={About} />
           <Redirect to='/' />
         </Switch>
       </div>
