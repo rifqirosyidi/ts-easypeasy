@@ -9,6 +9,7 @@ import useStyles from './styles';
 import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import Home from '../Home';
 import About from '../About';
+import { Container } from '@material-ui/core';
 
 export default function ButtonAppBar() {
   const classes = useStyles();
@@ -32,13 +33,13 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
 
-      <div className='App'>
+      <Container maxWidth='md'>
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/about' component={About} />
           <Redirect to='/' />
         </Switch>
-      </div>
+      </Container>
     </div>
   );
 }

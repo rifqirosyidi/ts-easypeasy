@@ -1,12 +1,14 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
 import React from 'react';
 import { useStoreState } from '../../hooks';
+import Form from '../Form';
 
 const Home: React.FC = () => {
   const entries = useStoreState(state => state.guestbook.entries);
 
   return (
     <div>
+      <Form />
       {entries.map(entry => (
         <Card key={entry.name}>
           <CardContent>
@@ -17,7 +19,7 @@ const Home: React.FC = () => {
               <em>author: </em>
               {entry.name}
             </Typography>
-            <Typography variant='caption'>{entry.submitted.toDateString()}</Typography>
+            <Typography variant='caption'>{entry.submitted ? entry.submitted.toDateString() : ''}</Typography>
           </CardContent>
         </Card>
       ))}
