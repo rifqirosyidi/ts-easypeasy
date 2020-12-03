@@ -16,13 +16,14 @@ const FormSchema = yup.object().shape({
 
 const Form: React.FC = () => {
   const classes = useStyles();
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, reset } = useForm({
     resolver: yupResolver(FormSchema),
   });
 
-  const addEntry = useStoreActions(actions => actions.guestbook.addEntry);
+  const createEntry = useStoreActions(actions => actions.guestbook.createEntry);
   const onSubmit = (data: GuestBookEntry): void => {
-    addEntry(data);
+    createEntry(data);
+    reset();
   };
 
   return (

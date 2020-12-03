@@ -1,16 +1,24 @@
 import { Card, CardContent, Typography } from '@material-ui/core';
-import React from 'react';
-import { useStoreState } from '../../hooks';
+import React, { useEffect } from 'react';
+import { useStoreState, useStoreActions } from '../../hooks';
 import Form from '../Form';
+import useStyles from './styles';
 
 const Home: React.FC = () => {
-  const entries = useStoreState(state => state.guestbook.entries);
+  const reverseEntries = useStoreState(state => state.guestbook.reverseEntries);
+  const getEntries = useStoreActions(state => state.guestbook.getEntries);
+  const classes = useStyles();
+
+  useEffect(() => {
+    getEntries();
+  }, []);
 
   return (
     <div>
       <Form />
-      {entries.map(entry => (
-        <Card key={entry.name}>
+
+      {reverseEntries.map(entry => (
+        <Card key={entry.name} className={classes.entryCard}>
           <CardContent>
             <Typography variant='h6'>
               <strong>{entry.content}</strong>
@@ -19,7 +27,7 @@ const Home: React.FC = () => {
               <em>author: </em>
               {entry.name}
             </Typography>
-            <Typography variant='caption'>{entry.submitted ? entry.submitted.toDateString() : ''}</Typography>
+            <Typography variant='caption'>{entry.submitted}</Typography>
           </CardContent>
         </Card>
       ))}
